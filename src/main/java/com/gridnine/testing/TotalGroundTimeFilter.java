@@ -13,15 +13,15 @@ public class TotalGroundTimeFilter implements FlightFilter {
         return flights.stream()
                 .filter(flight -> {
                     List<Segment> segments = flight.getSegments();
+                    long totalGroundTimeHours = 0;
                     for (int i = 0; i < segments.size() - 1; i++) {
                         LocalDateTime arrival = segments.get(i).getArrivalDate();
                         LocalDateTime nextDeparture = segments.get(i + 1).getDepartureDate();
                         long groundTimeHours = Duration.between(arrival, nextDeparture).toHours();
-                        if (groundTimeHours > maxGroundTime.toHours()) {
-                            return false;
-                        }
+                        totalGroundTimeHours += groundTimeHours;
                     }
-                    return true;
+
+                    return totalGroundTimeHours <= maxGroundTime.toHours();
                 })
                 .collect(Collectors.toList());
     }

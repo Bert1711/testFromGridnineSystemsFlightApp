@@ -37,7 +37,7 @@ class FlightFilterTests {
 
     @Test
     void totalGroundTimeFilterTest() {
-        int expectedNumberOfFlightsAfterFiltering = 5;
+        int expectedNumberOfFlightsAfterFiltering = 4;
         FlightFilter totalGroundTimeFilter = new TotalGroundTimeFilter();
         Duration maxGroundTime = Duration.ofHours(2);
 
