@@ -8,7 +8,7 @@ public class SegmentsArrivalBeforeDepartureFilter implements FlightFilter {
     public List<Flight> filterFlights(List<Flight> flights, Object... parameters) {
         return flights.stream()
                 .filter(flight -> flight.getSegments().stream()
-                        .allMatch(segment -> segment.getArrivalDate().isBefore(segment.getDepartureDate())))
+                        .allMatch(segment -> segment.getDepartureDate().isBefore( segment.getArrivalDate())))
                 .collect(Collectors.toList());
     }
 }
